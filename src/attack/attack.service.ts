@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Attack } from 'src/models/attack';
+import { AttackInterface } from 'src/models/attack.interface';
 
 @Injectable()
 export class AttackService {
-    allAttack: Attack[] = [
+    allAttack: AttackInterface[] = [
         {
             id: 1,
             idMonster: 1,
@@ -92,6 +92,17 @@ export class AttackService {
             toTheOpponent: false,
             sprites: ""
         },
-    ];     
-    
+    ];
+
+    findAttackByIdMonster(id: string): AttackInterface[]     {
+        return this.allAttack.filter(attack => attack.idMonster === Number(id));
+    }
+
+    findAttackById(id: string): AttackInterface {
+        return this.allAttack.find(attack => attack.id === Number(id));
+    }
+
+    findAllAttack(): AttackInterface[] {
+        return this.allAttack;
+    }
 }
